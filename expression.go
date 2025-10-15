@@ -2,20 +2,12 @@ package geomgen
 
 import "time"
 
-type Task struct {
-	ID        string    `json:"id"`
+type Expression[T any] struct {
 	Category  string    `json:"category"`
+	Data      T         `json:"data"`
 	Statement string    `json:"statement"`
 	Solution  string    `json:"solution"`
+	Valid     bool      `json:"valid"`
 	Seed      string    `json:"seed"`
 	CreatedAt time.Time `json:"created_at"`
 }
-
-type Category string
-
-const (
-	Vectors  Category = "vectors"
-	Lines    Category = "lines"
-	Curves   Category = "curves"
-	Surfaces Category = "surfaces"
-)

@@ -1,27 +1,38 @@
 package geomgen
 
 import (
-	"fmt"
+	"math/rand"
 	"time"
-
-	"github.com/shamhi/geomgen/categories"
 )
 
-func Generate(category Category, seed string) Task {
+type ExpressionGenerator[T any] interface {
+	Generate(r *rand.Rand) T
+	Validate(expr T) bool
+	ToString(expr T) string
+	Solve(expr T) (string, error)
+	Category() string
+}
+
+func GenerateValidExpression[T any](gen ExpressionGenerator[T], seed string) Expression[T] {
 	r := NewRand(seed)
-	var statement, solution string
-	switch category {
-	case Vectors:
-		statement, solution = categories.GenerateVectorAngle(r)
-	default:
-		statement, solution = "Unknown category", ""
-	}
-	return Task{
-		ID:        fmt.Sprintf("%x", SeedFromString(seed)),
-		Category:  string(category),
-		Statement: statement,
-		Solution:  solution,
-		Seed:      seed,
-		CreatedAt: time.Now(),
+	for {
+		expr := gen.Generate(r)
+		if gen.Validate(expr) {
+			statement := gen.ToString(expr)
+			solution, err := gen.Solve(expr)
+			if err != nil {
+				continue
+			}
+
+			return Expression[T]{
+				Category:  gen.Category(),
+				Data:      expr,
+				Statement: statement,
+				Solution:  solution,
+				Valid:     true,
+				Seed:      seed,
+				CreatedAt: time.Now(),
+			}
+		}
 	}
 }

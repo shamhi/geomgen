@@ -6,19 +6,40 @@ import (
 	"math/rand"
 )
 
-func GenerateVectorAngle(r *rand.Rand) (string, string) {
-	a := [3]int{r.Intn(11) - 5, r.Intn(11) - 5, r.Intn(11) - 5}
-	b := [3]int{r.Intn(11) - 5, r.Intn(11) - 5, r.Intn(11) - 5}
-	scalar := a[0]*b[0] + a[1]*b[1] + a[2]*b[2]
-	lenA := math.Sqrt(float64(a[0]*a[0] + a[1]*a[1] + a[2]*a[2]))
-	lenB := math.Sqrt(float64(b[0]*b[0] + b[1]*b[1] + b[2]*b[2]))
-	angle := math.Acos(float64(scalar)/(lenA*lenB)) * 180 / math.Pi
+type VectorPair struct {
+	A [3]float64
+	B [3]float64
+}
 
-	statement := fmt.Sprintf("Найти угол между векторами a=(%d,%d,%d) и b=(%d,%d,%d).",
-		a[0], a[1], a[2], b[0], b[1], b[2])
+type VectorAngleGenerator struct{}
 
-	solution := fmt.Sprintf("cos(θ) = %d / (%.2f × %.2f) ⇒ θ = %.2f°",
-		scalar, lenA, lenB, angle)
+func (g *VectorAngleGenerator) Category() string {
+	return "vectors.angle"
+}
 
-	return statement, solution
+func (g *VectorAngleGenerator) Generate(r *rand.Rand) VectorPair {
+	return VectorPair{
+		A: [3]float64{float64(r.Intn(11) - 5), float64(r.Intn(11) - 5), float64(r.Intn(11) - 5)},
+		B: [3]float64{float64(r.Intn(11) - 5), float64(r.Intn(11) - 5), float64(r.Intn(11) - 5)},
+	}
+}
+
+func (g *VectorAngleGenerator) Validate(v VectorPair) bool {
+	lenA := math.Sqrt(v.A[0]*v.A[0] + v.A[1]*v.A[1] + v.A[2]*v.A[2])
+	lenB := math.Sqrt(v.B[0]*v.B[0] + v.B[1]*v.B[1] + v.B[2]*v.B[2])
+	return lenA > 0.01 && lenB > 0.01
+}
+
+func (g *VectorAngleGenerator) ToString(v VectorPair) string {
+	return fmt.Sprintf("Найти угол между векторами a=(%.0f,%.0f,%.0f) и b=(%.0f,%.0f,%.0f).",
+		v.A[0], v.A[1], v.A[2], v.B[0], v.B[1], v.B[2])
+}
+
+func (g *VectorAngleGenerator) Solve(v VectorPair) (string, error) {
+	scalar := v.A[0]*v.B[0] + v.A[1]*v.B[1] + v.A[2]*v.B[2]
+	lenA := math.Sqrt(v.A[0]*v.A[0] + v.A[1]*v.A[1] + v.A[2]*v.A[2])
+	lenB := math.Sqrt(v.B[0]*v.B[0] + v.B[1]*v.B[1] + v.B[2]*v.B[2])
+
+	angle := math.Acos(scalar/(lenA*lenB)) * 180 / math.Pi
+	return fmt.Sprintf("cos(θ)=%.2f/(%.2f·%.2f) ⇒ θ=%.2f°", scalar, lenA, lenB, angle), nil
 }
