@@ -6,11 +6,11 @@ import (
 )
 
 type ExpressionGenerator[T any] interface {
+	Category() string
 	Generate(r *rand.Rand) T
 	Validate(expr T) bool
 	ToString(expr T) string
 	Solve(expr T) (string, error)
-	Category() string
 }
 
 func GenerateValidExpression[T any](gen ExpressionGenerator[T], seed string) Expression[T] {
