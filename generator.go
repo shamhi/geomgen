@@ -9,7 +9,7 @@ type ExpressionGenerator[T any] interface {
 	Category() string
 	Generate(r *rand.Rand) T
 	Validate(expr T) bool
-	ToString(expr T) string
+	ToLatex(expr T) string
 	Solve(expr T) (string, error)
 }
 
@@ -18,7 +18,7 @@ func GenerateValidExpression[T any](gen ExpressionGenerator[T], seed string) Exp
 	for {
 		expr := gen.Generate(r)
 		if gen.Validate(expr) {
-			statement := gen.ToString(expr)
+			statement := gen.ToLatex(expr)
 			solution, err := gen.Solve(expr)
 			if err != nil {
 				continue
