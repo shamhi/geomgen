@@ -43,7 +43,7 @@ func (g *PlaneThroughTwoPointsParallelVectorGenerator) Validate(p TwoPointsVecto
 }
 
 func (g *PlaneThroughTwoPointsParallelVectorGenerator) Statement(p TwoPointsVector) string {
-	return fmt.Sprintf("Составить уравнение плоскости, проходящей через точки $A(%.0f,%.0f,%.0f)$ и $B(%.0f,%.0f,%.0f)$, параллельно вектору $\\vec a=(%.0f,%.0f,%.0f)$.", p.A[0], p.A[1], p.A[2], p.B[0], p.B[1], p.B[2], p.V[0], p.V[1], p.V[2])
+	return fmt.Sprintf("Составить уравнение плоскости, проходящей через точки $A(%.0f,%.0f,%.0f)$ и $B(%.0f,%.0f,%.0f)$, параллельно вектору $\\vec{a}=(%.0f,%.0f,%.0f)$.", p.A[0], p.A[1], p.A[2], p.B[0], p.B[1], p.B[2], p.V[0], p.V[1], p.V[2])
 }
 
 func (g *PlaneThroughTwoPointsParallelVectorGenerator) Solve(p TwoPointsVector) (string, error) {

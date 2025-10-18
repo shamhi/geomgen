@@ -41,8 +41,8 @@ func (g *LineAngleGenerator) Validate(v LinePair) bool {
 func (g *LineAngleGenerator) Statement(v LinePair) string {
 	return fmt.Sprintf(
 		"Найти угол между прямыми с векторами направлений "+
-			"$\\vec{v_1} = (%.0f, %.0f, %.0f)$ и "+
-			"$\\vec{v_2} = (%.0f, %.0f, %.0f)$.",
+			"$\\vec{v}_{1}=(%.0f, %.0f, %.0f)$ и "+
+			"$\\vec{v}_{2}=(%.0f, %.0f, %.0f)$.",
 		v.V1[0], v.V1[1], v.V1[2],
 		v.V2[0], v.V2[1], v.V2[2],
 	)

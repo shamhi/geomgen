@@ -33,7 +33,7 @@ func (g *AngleLinePlaneGenerator) Validate(lp LineAndPlane) bool {
 }
 
 func (g *AngleLinePlaneGenerator) Statement(lp LineAndPlane) string {
-	return fmt.Sprintf("Найти угол между прямой $\\frac{x-%.0f}{%.0f}=\\frac{y-%.0f}{%.0f}=\\frac{z-%.0f}{%.0f}$ и плоскостью $%.0fx \\; %+0.0fy \\; %+0.0fz \\; %+0.0f = 0$.", lp.P[0], lp.D[0], lp.P[1], lp.D[1], lp.P[2], lp.D[2], lp.Pl[0], lp.Pl[1], lp.Pl[2], lp.Pl[3])
+	return fmt.Sprintf("Найти угол между прямой $\\dfrac{x-%.0f}{%.0f}=\\dfrac{y-%.0f}{%.0f}=\\dfrac{z-%.0f}{%.0f}$ и плоскостью $%.0fx \\; %+0.0fy \\; %+0.0fz \\; %+0.0f = 0$.", lp.P[0], lp.D[0], lp.P[1], lp.D[1], lp.P[2], lp.D[2], lp.Pl[0], lp.Pl[1], lp.Pl[2], lp.Pl[3])
 }
 
 func (g *AngleLinePlaneGenerator) Solve(lp LineAndPlane) (string, error) {
@@ -46,5 +46,5 @@ func (g *AngleLinePlaneGenerator) Solve(lp LineAndPlane) (string, error) {
 	}
 	angleRad := math.Asin(cosAngle)
 	phi := angleRad * 180 / math.Pi
-	return fmt.Sprintf("Угол между прямой и плоскостью: %.2f^\\circ", phi), nil
+	return fmt.Sprintf("$\\varphi=%.2f^{\\circ}$", phi), nil
 }

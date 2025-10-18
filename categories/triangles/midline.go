@@ -81,11 +81,11 @@ func (g *TriangleGenerator) Solve(t TrianglePoints) (string, error) {
 	canonMid := formatCanonical(Mab, dMid)
 	paramMed := formatParametric(t.C, dMed)
 	canonMed := formatCanonical(t.C, dMed)
-	return fmt.Sprintf("Средняя линия: параметрическое: %s; каноническое: %s. Медиана к AB: параметрическое: %s; каноническое: %s.", paramMid, canonMid, paramMed, canonMed), nil
+	return fmt.Sprintf("Средняя линия: параметрическое: $%s$; каноническое: $%s$. Медиана к AB: параметрическое: $%s$; каноническое: $%s$.", paramMid, canonMid, paramMed, canonMed), nil
 }
 
 func formatParametric(p [3]float64, d [3]float64) string {
-	return fmt.Sprintf("x=%.2f+t*%.2f, y=%.2f+t*%.2f, z=%.2f+t*%.2f", p[0], d[0], p[1], d[1], p[2], d[2])
+	return fmt.Sprintf("x=%.2f+t\\,%.2f,\\; y=%.2f+t\\,%.2f,\\; z=%.2f+t\\,%.2f", p[0], d[0], p[1], d[1], p[2], d[2])
 }
 
 func formatCanonical(p [3]float64, d [3]float64) string {
