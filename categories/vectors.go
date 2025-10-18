@@ -32,8 +32,11 @@ func (g *VectorAngleGenerator) Validate(v VectorPair) bool {
 
 func (g *VectorAngleGenerator) ToLatex(v VectorPair) string {
 	return fmt.Sprintf(
-		"Найти угол между векторами $\\vec{a}=(%.0f, %.0f, %.0f)$ и $\\vec{b}=(%.0f, %.0f, %.0f)$. ",
-		v.A[0], v.A[1], v.A[2], v.B[0], v.B[1], v.B[2],
+		"\\textbf{Задача.} Найти угол между векторами "+
+			"$\\overrightarrow{a} = (%.0f, %.0f, %.0f)$ и "+
+			"$\\overrightarrow{b} = (%.0f, %.0f, %.0f)$.\\\\\n",
+		v.A[0], v.A[1], v.A[2],
+		v.B[0], v.B[1], v.B[2],
 	)
 }
 
@@ -44,7 +47,8 @@ func (g *VectorAngleGenerator) Solve(v VectorPair) (string, error) {
 	angle := math.Acos(scalar/(lenA*lenB)) * 180 / math.Pi
 
 	return fmt.Sprintf(
-		"$\\cos(\\theta) = \\frac{%.2f}{%.2f \\cdot %.2f} \\Rightarrow \\theta = %.2f^{\\circ}$",
+		"$\\cos(\\theta) = \\frac{%.2f}{%.2f \\cdot %.2f}"+
+			" \\Rightarrow \\theta = %.2f^{\\circ}$\\\\\n",
 		scalar, lenA, lenB, angle,
 	), nil
 }
