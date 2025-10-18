@@ -53,17 +53,17 @@ func formatCanonical(p [3]float64, d [3]float64) string {
 	ratio := make([]string, 0, 3)
 	fixed := make([]string, 0, 3)
 	if math.Abs(d[0]) > eps {
-		ratio = append(ratio, fmt.Sprintf("(x-%.2f)/%.2f", p[0], d[0]))
+		ratio = append(ratio, fmt.Sprintf("\\dfrac{x-%.2f}{%.2f}", p[0], d[0]))
 	} else {
 		fixed = append(fixed, fmt.Sprintf("x=%.2f", p[0]))
 	}
 	if math.Abs(d[1]) > eps {
-		ratio = append(ratio, fmt.Sprintf("(y-%.2f)/%.2f", p[1], d[1]))
+		ratio = append(ratio, fmt.Sprintf("\\dfrac{y-%.2f}{%.2f}", p[1], d[1]))
 	} else {
 		fixed = append(fixed, fmt.Sprintf("y=%.2f", p[1]))
 	}
 	if math.Abs(d[2]) > eps {
-		ratio = append(ratio, fmt.Sprintf("(z-%.2f)/%.2f", p[2], d[2]))
+		ratio = append(ratio, fmt.Sprintf("\\dfrac{z-%.2f}{%.2f}", p[2], d[2]))
 	} else {
 		fixed = append(fixed, fmt.Sprintf("z=%.2f", p[2]))
 	}
