@@ -38,7 +38,7 @@ func (g *LineAngleGenerator) Validate(v LinePair) bool {
 	return lenV1 > 0.01 && lenV2 > 0.01
 }
 
-func (g *LineAngleGenerator) ToMarkdown(v LinePair) string {
+func (g *LineAngleGenerator) Statement(v LinePair) string {
 	return fmt.Sprintf(
 		"**Задача.** Найти угол между прямыми с векторами направлений "+
 			"$\\vec{v_1} = (%.0f, %.0f, %.0f)$ и "+

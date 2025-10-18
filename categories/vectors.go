@@ -38,9 +38,9 @@ func (g *VectorAngleGenerator) Validate(v VectorPair) bool {
 	return lenA > 0.01 && lenB > 0.01
 }
 
-func (g *VectorAngleGenerator) ToMarkdown(v VectorPair) string {
+func (g *VectorAngleGenerator) Statement(v VectorPair) string {
 	return fmt.Sprintf(
-		"**Задача.** Найти угол между векторами "+
+		"Найти угол между векторами "+
 			"$\\mathbf{a} = (%.0f, %.0f, %.0f)$ и "+
 			"$\\mathbf{b} = (%.0f, %.0f, %.0f)$.",
 		v.A[0], v.A[1], v.A[2],
