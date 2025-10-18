@@ -45,7 +45,7 @@ func (g *LinePerpPlaneGenerator) Solve(pp PointPlane) (string, error) {
 }
 
 func formatParametric(p [3]float64, d [3]float64) string {
-	return fmt.Sprintf("x=%.2f+t\\,%.2f,\\; y=%.2f+t\\,%.2f,\\; z=%.2f+t\\,%.2f", p[0], d[0], p[1], d[1], p[2], d[2])
+	return fmt.Sprintf("x=%.2f + t\\cdot(%.2f),\\; y=%.2f + t\\cdot(%.2f),\\; z=%.2f + t\\cdot(%.2f)", p[0], d[0], p[1], d[1], p[2], d[2])
 }
 
 func formatCanonical(p [3]float64, d [3]float64) string {

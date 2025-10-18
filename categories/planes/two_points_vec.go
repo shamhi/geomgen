@@ -55,5 +55,5 @@ func (g *PlaneThroughTwoPointsParallelVectorGenerator) Solve(p TwoPointsVector) 
 		u[0]*v[1] - u[1]*v[0],
 	}
 	D := -(n[0]*p.A[0] + n[1]*p.A[1] + n[2]*p.A[2])
-	return fmt.Sprintf("Уравнение плоскости: %.0fx %+0.0fy %+0.0fz %+0.0f = 0", n[0], n[1], n[2], D), nil
+	return fmt.Sprintf("$%.0f x \\; %+0.0f y \\; %+0.0f z \\; %+0.0f = 0$", n[0], n[1], n[2], D), nil
 }
