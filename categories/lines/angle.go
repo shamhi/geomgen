@@ -1,4 +1,4 @@
-package categories
+package lines
 
 import (
 	"fmt"
@@ -40,7 +40,7 @@ func (g *LineAngleGenerator) Validate(v LinePair) bool {
 
 func (g *LineAngleGenerator) Statement(v LinePair) string {
 	return fmt.Sprintf(
-		"**Задача.** Найти угол между прямыми с векторами направлений "+
+		"Найти угол между прямыми с векторами направлений "+
 			"$\\vec{v_1} = (%.0f, %.0f, %.0f)$ и "+
 			"$\\vec{v_2} = (%.0f, %.0f, %.0f)$.",
 		v.V1[0], v.V1[1], v.V1[2],
@@ -52,7 +52,13 @@ func (g *LineAngleGenerator) Solve(v LinePair) (string, error) {
 	scalar := v.V1[0]*v.V2[0] + v.V1[1]*v.V2[1] + v.V1[2]*v.V2[2]
 	lenV1 := math.Sqrt(v.V1[0]*v.V1[0] + v.V1[1]*v.V1[1] + v.V1[2]*v.V1[2])
 	lenV2 := math.Sqrt(v.V2[0]*v.V2[0] + v.V2[1]*v.V2[1] + v.V2[2]*v.V2[2])
-	angle := math.Acos(scalar/(lenV1*lenV2)) * 180 / math.Pi
+	c := scalar / (lenV1 * lenV2)
+	if c > 1 {
+		c = 1
+	} else if c < -1 {
+		c = -1
+	}
+	angle := math.Acos(c) * 180 / math.Pi
 
 	return fmt.Sprintf(
 		"$\\cos(\\theta) = \\frac{%.2f}{%.2f \\cdot %.2f} \\Rightarrow \\theta = %.2f^{\\circ}$",

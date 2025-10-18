@@ -1,4 +1,4 @@
-package categories
+package vectors
 
 import (
 	"fmt"
@@ -52,7 +52,13 @@ func (g *VectorAngleGenerator) Solve(v VectorPair) (string, error) {
 	scalar := v.A[0]*v.B[0] + v.A[1]*v.B[1] + v.A[2]*v.B[2]
 	lenA := math.Sqrt(v.A[0]*v.A[0] + v.A[1]*v.A[1] + v.A[2]*v.A[2])
 	lenB := math.Sqrt(v.B[0]*v.B[0] + v.B[1]*v.B[1] + v.B[2]*v.B[2])
-	angle := math.Acos(scalar/(lenA*lenB)) * 180 / math.Pi
+	c := scalar / (lenA * lenB)
+	if c > 1 {
+		c = 1
+	} else if c < -1 {
+		c = -1
+	}
+	angle := math.Acos(c) * 180 / math.Pi
 
 	return fmt.Sprintf(
 		"$\\cos(\\theta) = \\frac{%.2f}{%.2f \\cdot %.2f}$ "+
