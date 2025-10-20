@@ -30,7 +30,7 @@ func HTMLRenderer(result geomgen.WorkResult) string {
 	b.WriteString("<h2>Условия</h2><ol>")
 	for _, p := range result.Problems {
 		b.WriteString("<li><div class=\"statement\"><p>")
-		b.WriteString(p.Statement) // содержит $...$ / \(...\) / \[...\]
+		b.WriteString(p.Statement)
 		b.WriteString("</p></div></li>")
 	}
 	b.WriteString("</ol>")
@@ -45,7 +45,6 @@ func HTMLRenderer(result geomgen.WorkResult) string {
 		b.WriteString("</ol>")
 	}
 
-	// Важно: явно включаем одиночные доллары '$' как инлайн-делимитеры
 	b.WriteString("<script>")
 	b.WriteString("document.addEventListener('DOMContentLoaded', function(){")
 	b.WriteString("if (typeof renderMathInElement==='function'){")
