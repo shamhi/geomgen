@@ -10,6 +10,7 @@ import (
 	"github.com/shamhi/geomgen"
 )
 
+// toMarkdown builds a Markdown document preserving TeX math
 func toMarkdown(result geomgen.WorkResult) string {
 	var b strings.Builder
 
