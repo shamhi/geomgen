@@ -19,19 +19,19 @@ func HTMLRenderer(result geomgen.WorkResult) string {
 		b.WriteString("Generated Work")
 	}
 	b.WriteString("</title>\n")
-	b.WriteString("<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css\">\n")
-	b.WriteString("<script defer src=\"https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js\"></script>\n")
-	b.WriteString("<script defer src=\"https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js\" onload=\"renderMathInElement(document.body)\"></script>\n")
+
+	// KaTeX CSS/JS + auto-render
+	b.WriteString("<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css\">\n")
+	b.WriteString("<script defer src=\"https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js\"></script>\n")
+	b.WriteString("<script defer src=\"https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js\"></script>\n")
 	b.WriteString("</head><body><main>")
+
 	b.WriteString(fmt.Sprintf("<h1>%s</h1>", html.EscapeString(result.Config.Title)))
 	b.WriteString("<h2>Условия</h2><ol>")
-	for i, p := range result.Problems {
-		_ = i
-		b.WriteString("<li><div class=\"statement\">")
-		b.WriteString("<p>")
-		b.WriteString(p.Statement)
-		b.WriteString("</p>")
-		b.WriteString("</div></li>")
+	for _, p := range result.Problems {
+		b.WriteString("<li><div class=\"statement\"><p>")
+		b.WriteString(p.Statement) // содержит $...$ / \(...\) / \[...\]
+		b.WriteString("</p></div></li>")
 	}
 	b.WriteString("</ol>")
 
@@ -44,6 +44,23 @@ func HTMLRenderer(result geomgen.WorkResult) string {
 		}
 		b.WriteString("</ol>")
 	}
+
+	// Важно: явно включаем одиночные доллары '$' как инлайн-делимитеры
+	b.WriteString("<script>")
+	b.WriteString("document.addEventListener('DOMContentLoaded', function(){")
+	b.WriteString("if (typeof renderMathInElement==='function'){")
+	b.WriteString("renderMathInElement(document.body,{")
+	b.WriteString("delimiters:[")
+	b.WriteString("{left:'$$',right:'$$',display:true},")
+	b.WriteString("{left:'$',right:'$',display:false},")
+	b.WriteString("{left:'\\\\(',right:'\\\\)',display:false},")
+	b.WriteString("{left:'\\\\[',right:'\\\\]',display:true}")
+	b.WriteString("],")
+	b.WriteString("throwOnError:false")
+	b.WriteString("});")
+	b.WriteString("}")
+	b.WriteString("});")
+	b.WriteString("</script>")
 
 	b.WriteString("</main></body></html>")
 	return b.String()
