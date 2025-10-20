@@ -40,7 +40,6 @@ func (g *TriangleGenerator) Generate(r *rand.Rand) TrianglePoints {
 }
 
 func (g *TriangleGenerator) Validate(t TrianglePoints) bool {
-	// Проверка, что точки не коллинеарны (не лежат на одной прямой)
 	AB := [3]float64{t.B[0] - t.A[0], t.B[1] - t.A[1], t.B[2] - t.A[2]}
 	AC := [3]float64{t.C[0] - t.A[0], t.C[1] - t.A[1], t.C[2] - t.A[2]}
 	cross := [3]float64{
@@ -83,5 +82,3 @@ func (g *TriangleGenerator) Solve(t TrianglePoints) (string, error) {
 	canonMed := utils.FormatCanonical(t.C, dMed)
 	return fmt.Sprintf("Средняя линия: параметрическое: $%s$; каноническое: $%s$. Медиана к AB: параметрическое: $%s$; каноническое: $%s$.", paramMid, canonMid, paramMed, canonMed), nil
 }
-
-// formatting helpers moved to github.com/shamhi/geomgen/utils
