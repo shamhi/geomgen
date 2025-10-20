@@ -23,7 +23,7 @@ func HTMLRenderer(result geomgen.WorkResult) string {
 	// KaTeX CSS/JS + auto-render
 	b.WriteString("<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css\">\n")
 	b.WriteString("<script defer src=\"https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js\"></script>\n")
-	b.WriteString("<script defer src=\"https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js\" onload=\"renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\\\(',right:'\\\\)',display:false},{left:'\\\\[',right:'\\\\]',display:true}],throwOnError:false});\"></script>\n")
+	b.WriteString("<script defer src=\"https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js\"></script>\n")
 	b.WriteString("<style>")
 	b.WriteString("body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:18px;line-height:1.6;margin:24px;}")
 	b.WriteString("h1{margin:0 0 0.75em} h2{margin:1.25em 0 0.5em}")
