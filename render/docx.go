@@ -7,8 +7,7 @@ import (
 	"github.com/shamhi/geomgen"
 )
 
-// DOCXRenderer is a stub returning raw bytes placeholder.
-// In a full implementation, integrate gooxml/unioffice or template-based DOCX generation.
+// DOCXRenderer stub returning raw bytes placeholder. TODO: soon
 func DOCXRenderer(result geomgen.WorkResult) []byte {
 	var buf bytes.Buffer
 	buf.WriteString("DOCX generation is not yet implemented.\n")
