@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// ExpressionGenerator[T] base interface for all generators
 type ExpressionGenerator[T any] interface {
 	Category() string
 	Generate(r *rand.Rand) T
@@ -13,6 +14,7 @@ type ExpressionGenerator[T any] interface {
 	Solve(expr T) (string, error)
 }
 
+// GenerateValidExpression[T] main method for generating expressions based on `seed`
 func GenerateValidExpression[T any](gen ExpressionGenerator[T], seed string) Expression[T] {
 	r := NewRand(seed)
 	const maxAttempts = 10000
