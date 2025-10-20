@@ -2,9 +2,9 @@ package triangles
 
 import (
 	"fmt"
-	"math"
 	"math/rand"
-	"strings"
+
+	"github.com/shamhi/geomgen/utils"
 )
 
 type TrianglePoints struct {
@@ -77,45 +77,11 @@ func (g *TriangleGenerator) Solve(t TrianglePoints) (string, error) {
 	}
 	dMid := [3]float64{Mac[0] - Mab[0], Mac[1] - Mab[1], Mac[2] - Mab[2]}
 	dMed := [3]float64{Mab[0] - t.C[0], Mab[1] - t.C[1], Mab[2] - t.C[2]}
-	paramMid := formatParametric(Mab, dMid)
-	canonMid := formatCanonical(Mab, dMid)
-	paramMed := formatParametric(t.C, dMed)
-	canonMed := formatCanonical(t.C, dMed)
+	paramMid := utils.FormatParametric(Mab, dMid)
+	canonMid := utils.FormatCanonical(Mab, dMid)
+	paramMed := utils.FormatParametric(t.C, dMed)
+	canonMed := utils.FormatCanonical(t.C, dMed)
 	return fmt.Sprintf("Средняя линия: параметрическое: $%s$; каноническое: $%s$. Медиана к AB: параметрическое: $%s$; каноническое: $%s$.", paramMid, canonMid, paramMed, canonMed), nil
 }
 
-func formatParametric(p [3]float64, d [3]float64) string {
-	return fmt.Sprintf("x=%.2f + t\\cdot(%.2f),\\; y=%.2f + t\\cdot(%.2f),\\; z=%.2f + t\\cdot(%.2f)", p[0], d[0], p[1], d[1], p[2], d[2])
-}
-
-func formatCanonical(p [3]float64, d [3]float64) string {
-	eps := 1e-9
-	ratio := make([]string, 0, 3)
-	fixed := make([]string, 0, 3)
-	if math.Abs(d[0]) > eps {
-		ratio = append(ratio, fmt.Sprintf("\\dfrac{x-%.2f}{%.2f}", p[0], d[0]))
-	} else {
-		fixed = append(fixed, fmt.Sprintf("x=%.2f", p[0]))
-	}
-	if math.Abs(d[1]) > eps {
-		ratio = append(ratio, fmt.Sprintf("\\dfrac{y-%.2f}{%.2f}", p[1], d[1]))
-	} else {
-		fixed = append(fixed, fmt.Sprintf("y=%.2f", p[1]))
-	}
-	if math.Abs(d[2]) > eps {
-		ratio = append(ratio, fmt.Sprintf("\\dfrac{z-%.2f}{%.2f}", p[2], d[2]))
-	} else {
-		fixed = append(fixed, fmt.Sprintf("z=%.2f", p[2]))
-	}
-	var b strings.Builder
-	if len(ratio) > 0 {
-		b.WriteString(strings.Join(ratio, " = "))
-	}
-	if len(fixed) > 0 {
-		if b.Len() > 0 {
-			b.WriteString("; ")
-		}
-		b.WriteString(strings.Join(fixed, ", "))
-	}
-	return b.String()
-}
+// formatting helpers moved to github.com/shamhi/geomgen/utils
