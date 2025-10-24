@@ -45,6 +45,7 @@ type WorkConfig struct {
 // Problem holds a single statement and its solution
 type Problem struct {
 	Category  string `json:"category"`
+	Title     string `json:"title"`
 	Statement string `json:"statement"`
 	Solution  string `json:"solution"`
 }

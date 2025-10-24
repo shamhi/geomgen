@@ -42,7 +42,8 @@ func GenerateWork(cfg WorkConfig) (WorkResult, error) {
 			if !ok {
 				return WorkResult{}, fmt.Errorf("failed to generate problem for key=%s after %d attempts", it.Key, opts.MaxAttempts)
 			}
-			result.Problems = append(result.Problems, Problem{Category: it.Key, Statement: stmt, Solution: sol})
+			meta := gen.Meta()
+			result.Problems = append(result.Problems, Problem{Category: it.Key, Title: meta.Title, Statement: stmt, Solution: sol})
 		}
 	}
 	return result, nil
