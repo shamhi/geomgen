@@ -18,6 +18,10 @@ func (g *AngleLinePlaneGenerator) Category() string {
 	return "lines.angle_plane"
 }
 
+func (g *AngleLinePlaneGenerator) Title() string {
+	return "Угол между прямой и плоскостью"
+}
+
 func (g *AngleLinePlaneGenerator) Generate(r *rand.Rand) LineAndPlane {
 	return LineAndPlane{
 		P:  [3]float64{float64(r.Intn(11) - 5), float64(r.Intn(11) - 5), float64(r.Intn(11) - 5)},

@@ -19,6 +19,10 @@ func (g *LinePerpPlaneGenerator) Category() string {
 	return "lines.perp_plane"
 }
 
+func (g *LinePerpPlaneGenerator) Title() string {
+	return "Прямая ⟂ плоскости через точку"
+}
+
 func (g *LinePerpPlaneGenerator) Generate(r *rand.Rand) PointPlane {
 	pp := PointPlane{
 		P:     [3]float64{float64(r.Intn(11) - 5), float64(r.Intn(11) - 5), float64(r.Intn(11) - 5)},

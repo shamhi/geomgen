@@ -18,6 +18,10 @@ func (g *PlaneThroughTwoPointsParallelVectorGenerator) Category() string {
 	return "planes.two_points_vec"
 }
 
+func (g *PlaneThroughTwoPointsParallelVectorGenerator) Title() string {
+	return "Плоскость через две точки ∥ вектору"
+}
+
 func (g *PlaneThroughTwoPointsParallelVectorGenerator) Generate(r *rand.Rand) TwoPointsVector {
 	return TwoPointsVector{
 		A: [3]float64{float64(r.Intn(11) - 5), float64(r.Intn(11) - 5), float64(r.Intn(11) - 5)},

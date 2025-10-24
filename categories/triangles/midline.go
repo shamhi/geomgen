@@ -19,6 +19,10 @@ func (g *TriangleGenerator) Category() string {
 	return "triangles.midline"
 }
 
+func (g *TriangleGenerator) Title() string {
+	return "Средняя линия и медиана треугольника"
+}
+
 func (g *TriangleGenerator) Generate(r *rand.Rand) TrianglePoints {
 	return TrianglePoints{
 		A: [3]float64{

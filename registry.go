@@ -32,7 +32,18 @@ type GeneratorAdapter[T any] struct {
 
 func (a GeneratorAdapter[T]) Key() string { return a.Impl.Category() }
 
-func (a GeneratorAdapter[T]) Meta() GeneratorMeta { return a.M }
+func (a GeneratorAdapter[T]) Meta() GeneratorMeta {
+	// если в адаптере не заполнён Title, используем Title() реализаии генератора
+	if a.M.Title == "" {
+		return GeneratorMeta{
+			Title:   a.Impl.Title(),
+			Tags:    a.M.Tags,
+			MinDiff: a.M.MinDiff,
+			MaxDiff: a.M.MaxDiff,
+		}
+	}
+	return a.M
+}
 
 func (a GeneratorAdapter[T]) Generate(r *rand.Rand, opts Options) (stmt string, sol string, ok bool) {
 	maxAttempts := opts.MaxAttempts

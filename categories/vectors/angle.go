@@ -17,6 +17,10 @@ func (g *VectorAngleGenerator) Category() string {
 	return "vectors.angle"
 }
 
+func (g *VectorAngleGenerator) Title() string {
+	return "Угол между векторами"
+}
+
 func (g *VectorAngleGenerator) Generate(r *rand.Rand) VectorPair {
 	return VectorPair{
 		A: [3]float64{

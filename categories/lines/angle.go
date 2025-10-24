@@ -17,6 +17,10 @@ func (g *LineAngleGenerator) Category() string {
 	return "lines.angle"
 }
 
+func (g *LineAngleGenerator) Title() string {
+	return "Угол между прямыми"
+}
+
 func (g *LineAngleGenerator) Generate(r *rand.Rand) LinePair {
 	return LinePair{
 		V1: [3]float64{

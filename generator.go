@@ -8,6 +8,7 @@ import (
 // ExpressionGenerator[T] base interface for all generators
 type ExpressionGenerator[T any] interface {
 	Category() string
+	Title() string
 	Generate(r *rand.Rand) T
 	Validate(expr T) bool
 	Statement(expr T) string
