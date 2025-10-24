@@ -4,6 +4,7 @@ import "time"
 
 type Expression[T any] struct {
 	Category  string    `json:"category"`
+	Title     string    `json:"title"`
 	Data      T         `json:"data"`
 	Statement string    `json:"statement"`
 	Solution  string    `json:"solution"`

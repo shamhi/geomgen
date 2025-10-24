@@ -31,6 +31,7 @@ func GenerateValidExpression[T any](gen ExpressionGenerator[T], seed string) Exp
 		}
 		return Expression[T]{
 			Category:  gen.Category(),
+			Title:     gen.Title(),
 			Data:      expr,
 			Statement: statement,
 			Solution:  solution,
@@ -41,6 +42,7 @@ func GenerateValidExpression[T any](gen ExpressionGenerator[T], seed string) Exp
 	}
 	return Expression[T]{
 		Category:  gen.Category(),
+		Title:     gen.Title(),
 		Valid:     false,
 		Seed:      seed,
 		CreatedAt: time.Now(),
