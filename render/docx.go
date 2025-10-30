@@ -23,15 +23,7 @@ func toMarkdown(result geomgen.WorkResult) string {
 
 	b.WriteString("## Условия\n\n")
 	for i, p := range result.Problems {
-		label := p.Title
-		if label == "" {
-			label = p.Category
-		}
-		if label != "" {
-			fmt.Fprintf(&b, "%d. %s  _(категория: %s)_\n\n", i+1, p.Statement, label)
-		} else {
-			fmt.Fprintf(&b, "%d. %s\n\n", i+1, p.Statement)
-		}
+		fmt.Fprintf(&b, "%d. %s\n\n", i+1, p.Statement)
 	}
 
 	if result.Config.Type == geomgen.WorkTypeExam {
