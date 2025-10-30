@@ -33,7 +33,9 @@ func (g *AngleLinePlaneGenerator) Generate(r *rand.Rand) LineAndPlane {
 func (g *AngleLinePlaneGenerator) Validate(lp LineAndPlane) bool {
 	lenD := math.Sqrt(lp.D[0]*lp.D[0] + lp.D[1]*lp.D[1] + lp.D[2]*lp.D[2])
 	lenN := math.Abs(lp.Pl[0]) + math.Abs(lp.Pl[1]) + math.Abs(lp.Pl[2])
-	return lenD > 0.01 && lenN > 1e-6
+	eps := 1e-6
+	noZeroDenoms := math.Abs(lp.D[0]) > eps && math.Abs(lp.D[1]) > eps && math.Abs(lp.D[2]) > eps
+	return lenD > 0.01 && lenN > eps && noZeroDenoms
 }
 
 func (g *AngleLinePlaneGenerator) Statement(lp LineAndPlane) string {
