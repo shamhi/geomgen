@@ -20,7 +20,6 @@ func HTMLRenderer(result geomgen.WorkResult) string {
 	}
 	b.WriteString("</title>\n")
 
-	// KaTeX CSS/JS + auto-render
 	b.WriteString("<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css\">\n")
 	b.WriteString("<script defer src=\"https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js\"></script>\n")
 	b.WriteString("<script defer src=\"https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js\" onload=\"renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\\\(',right:'\\\\)',display:false},{left:'\\\\[',right:'\\\\]',display:true}],throwOnError:false});\"></script>\n")

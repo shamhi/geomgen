@@ -40,7 +40,6 @@ func toMarkdown(result geomgen.WorkResult) string {
 func DOCXRenderer(result geomgen.WorkResult, extraArgs ...string) ([]byte, error) {
 	md := toMarkdown(result)
 
-	// Create secure unique temporary files
 	tmpDir := os.TempDir()
 	tmpMDFile, err := os.CreateTemp(tmpDir, "geomgen_*.md")
 	if err != nil {
@@ -52,12 +51,10 @@ func DOCXRenderer(result geomgen.WorkResult, extraArgs ...string) ([]byte, error
 		_ = os.Remove(tmpMD)
 	}()
 
-	// write markdown to temp file
 	if _, err := tmpMDFile.WriteString(md); err != nil {
 		return nil, fmt.Errorf("write temp markdown: %w", err)
 	}
 
-	// prepare temp output docx path
 	tmpDOCXFile, err := os.CreateTemp(tmpDir, "geomgen_*.docx")
 	if err != nil {
 		return nil, fmt.Errorf("create temp docx file: %w", err)
@@ -68,7 +65,6 @@ func DOCXRenderer(result geomgen.WorkResult, extraArgs ...string) ([]byte, error
 		_ = os.Remove(tmpDOCX)
 	}()
 
-	// build pandoc args
 	args := []string{
 		"--from=markdown+tex_math_dollars+tex_math_single_backslash",
 		"--to=docx",
@@ -80,7 +76,6 @@ func DOCXRenderer(result geomgen.WorkResult, extraArgs ...string) ([]byte, error
 		args = append(args, extraArgs...)
 	}
 
-	// execute pandoc with timeout via context
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 	cmd := exec.CommandContext(ctx, "pandoc", args...)

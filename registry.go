@@ -33,7 +33,6 @@ type GeneratorAdapter[T any] struct {
 func (a GeneratorAdapter[T]) Key() string { return a.Impl.Category() }
 
 func (a GeneratorAdapter[T]) Meta() GeneratorMeta {
-	// если в адаптере не заполнён Title, используем Title() реализаии генератора
 	if a.M.Title == "" {
 		return GeneratorMeta{
 			Title:   a.Impl.Title(),
