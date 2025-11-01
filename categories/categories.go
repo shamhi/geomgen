@@ -11,5 +11,5 @@ type VectorAngleGenerator = vectors.VectorAngleGenerator
 type LineAngleGenerator = lines.LineAngleGenerator
 type LinePerpPlaneGenerator = lines.LinePerpPlaneGenerator
 type AngleLinePlaneGenerator = lines.AngleLinePlaneGenerator
-type TriangleGenerator = triangles.TriangleGenerator
-type PlaneThroughTwoPointsParallelVectorGenerator = planes.PlaneThroughTwoPointsParallelVectorGenerator
+type TriangleGenerator = triangles.TriangleMidlineMedianGenerator
+type PlaneThroughTwoPointsParallelVectorGenerator = planes.PlaneTwoPointsParallelVectorGenerator

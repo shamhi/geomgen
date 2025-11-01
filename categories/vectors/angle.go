@@ -23,16 +23,8 @@ func (g *VectorAngleGenerator) Title() string {
 
 func (g *VectorAngleGenerator) Generate(r *rand.Rand) VectorPair {
 	return VectorPair{
-		A: [3]float64{
-			float64(r.Intn(11) - 5),
-			float64(r.Intn(11) - 5),
-			float64(r.Intn(11) - 5),
-		},
-		B: [3]float64{
-			float64(r.Intn(11) - 5),
-			float64(r.Intn(11) - 5),
-			float64(r.Intn(11) - 5),
-		},
+		A: [3]float64{float64(r.Intn(11) - 5), float64(r.Intn(11) - 5), float64(r.Intn(11) - 5)},
+		B: [3]float64{float64(r.Intn(11) - 5), float64(r.Intn(11) - 5), float64(r.Intn(11) - 5)},
 	}
 }
 
@@ -44,11 +36,8 @@ func (g *VectorAngleGenerator) Validate(v VectorPair) bool {
 
 func (g *VectorAngleGenerator) Statement(v VectorPair) string {
 	return fmt.Sprintf(
-		"Найти угол между векторами "+
-			"$\\vec{a}=(%.0f, %.0f, %.0f)$ и "+
-			"$\\vec{b}=(%.0f, %.0f, %.0f)$.",
-		v.A[0], v.A[1], v.A[2],
-		v.B[0], v.B[1], v.B[2],
+		"Найти угол между векторами $\\vec{a} = (%.0f, %.0f, %.0f)$ и $\\vec{b} = (%.0f, %.0f, %.0f)$.",
+		v.A[0], v.A[1], v.A[2], v.B[0], v.B[1], v.B[2],
 	)
 }
 
@@ -65,7 +54,10 @@ func (g *VectorAngleGenerator) Solve(v VectorPair) (string, error) {
 	angle := math.Acos(c) * 180 / math.Pi
 
 	return fmt.Sprintf(
-		"$\\cos(\\theta)=\\frac{%.2f}{%.2f\\cdot%.2f} \\Rightarrow \\theta=%.2f^{\\circ}$",
-		scalar, lenA, lenB, angle,
+		"1. Скалярное произведение: $(\\vec{a}, \\vec{b}) = %.2f$. \n"+
+			"2. Длины: $|\\vec{a}| = %.2f$, $|\\vec{b}| = %.2f$. \n"+
+			"3. $\\cos(\\theta) = \\dfrac{(\\vec{a}, \\vec{b})}{|\\vec{a}||\\vec{b}|} = %.2f$. \n"+
+			"4. $\\theta = %.2f^{\\circ}$. ",
+		scalar, lenA, lenB, c, angle,
 	), nil
 }
