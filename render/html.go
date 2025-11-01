@@ -6,7 +6,6 @@ import (
 	"strings"
 
 	"github.com/shamhi/geomgen/v2"
-	geomgen "github.com/shamhi/geomgen/v2/v2"
 )
 
 // HTMLRenderer renders WorkResult to a simple HTML page with LaTeX passthrough
