@@ -4,8 +4,10 @@ import (
 	"math/rand"
 	"sort"
 
+	"github.com/shamhi/geomgen/categories/coordinates"
 	"github.com/shamhi/geomgen/categories/lines"
 	"github.com/shamhi/geomgen/categories/planes"
+	"github.com/shamhi/geomgen/categories/points"
 	"github.com/shamhi/geomgen/categories/triangles"
 	"github.com/shamhi/geomgen/categories/vectors"
 )
@@ -89,27 +91,39 @@ var DefaultRegistry = func() *Registry {
 
 	reg.Register(GeneratorAdapter[vectors.VectorPair]{
 		Impl: &vectors.VectorAngleGenerator{},
-		M:    GeneratorMeta{Title: "Угол между векторами", Tags: []string{"vectors", "angle"}, MinDiff: 1, MaxDiff: 3},
+		M:    GeneratorMeta{Title: "Угол между векторами", Tags: []string{"vectors", "geometry", "angle"}, MinDiff: 1, MaxDiff: 3},
 	})
 	reg.Register(GeneratorAdapter[lines.LinePair]{
 		Impl: &lines.LineAngleGenerator{},
-		M:    GeneratorMeta{Title: "Угол между прямыми", Tags: []string{"lines", "angle"}, MinDiff: 1, MaxDiff: 3},
+		M:    GeneratorMeta{Title: "Угол между прямыми", Tags: []string{"lines", "geometry", "angle"}, MinDiff: 1, MaxDiff: 3},
 	})
 	reg.Register(GeneratorAdapter[lines.PointPlane]{
 		Impl: &lines.LinePerpPlaneGenerator{},
-		M:    GeneratorMeta{Title: "Прямая ⟂ плоскости через точку", Tags: []string{"lines", "planes"}, MinDiff: 1, MaxDiff: 3},
+		M:    GeneratorMeta{Title: "Прямая, перпендикулярная плоскости через точку", Tags: []string{"lines", "planes", "perpendicular"}, MinDiff: 1, MaxDiff: 3},
 	})
 	reg.Register(GeneratorAdapter[lines.LineAndPlane]{
 		Impl: &lines.AngleLinePlaneGenerator{},
-		M:    GeneratorMeta{Title: "Угол между прямой и плоскостью", Tags: []string{"lines", "planes", "angle"}, MinDiff: 1, MaxDiff: 3},
+		M:    GeneratorMeta{Title: "Угол между прямой и плоскостью", Tags: []string{"lines", "planes", "angle"}, MinDiff: 2, MaxDiff: 4},
 	})
 	reg.Register(GeneratorAdapter[triangles.TrianglePoints]{
-		Impl: &triangles.TriangleGenerator{},
-		M:    GeneratorMeta{Title: "Средняя линия и медиана треугольника", Tags: []string{"triangles", "lines"}, MinDiff: 1, MaxDiff: 3},
+		Impl: &triangles.TriangleMidlineMedianGenerator{},
+		M:    GeneratorMeta{Title: "Средняя линия и медиана треугольника", Tags: []string{"triangles", "geometry", "lines"}, MinDiff: 1, MaxDiff: 3},
+	})
+	reg.Register(GeneratorAdapter[triangles.TriangleAreaPoints]{
+		Impl: &triangles.TriangleAreaGenerator{},
+		M:    GeneratorMeta{Title: "Площадь треугольника по координатам", Tags: []string{"triangles", "geometry", "area"}, MinDiff: 1, MaxDiff: 3},
 	})
 	reg.Register(GeneratorAdapter[planes.TwoPointsVector]{
-		Impl: &planes.PlaneThroughTwoPointsParallelVectorGenerator{},
-		M:    GeneratorMeta{Title: "Плоскость через две точки ∥ вектору", Tags: []string{"planes"}, MinDiff: 1, MaxDiff: 3},
+		Impl: &planes.PlaneTwoPointsParallelVectorGenerator{},
+		M:    GeneratorMeta{Title: "Плоскость через две точки, параллельная вектору", Tags: []string{"planes", "vectors", "geometry"}, MinDiff: 2, MaxDiff: 4},
+	})
+	reg.Register(GeneratorAdapter[coordinates.ChangeBasisData]{
+		Impl: &coordinates.ChangeBasisGenerator{},
+		M:    GeneratorMeta{Title: "Переход к новому базису координат", Tags: []string{"coordinates", "basis", "linear-algebra"}, MinDiff: 3, MaxDiff: 5},
+	})
+	reg.Register(GeneratorAdapter[points.MirrorPlaneData]{
+		Impl: &points.MirrorPlaneGenerator{},
+		M:    GeneratorMeta{Title: "Отражение точки относительно плоскости", Tags: []string{"points", "planes", "mirror", "geometry"}, MinDiff: 2, MaxDiff: 4},
 	})
 
 	return reg
