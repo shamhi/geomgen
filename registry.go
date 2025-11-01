@@ -45,11 +45,7 @@ func (a GeneratorAdapter[T]) Meta() GeneratorMeta {
 }
 
 func (a GeneratorAdapter[T]) Generate(r *rand.Rand, opts Options) (stmt string, sol string, ok bool) {
-	maxAttempts := opts.MaxAttempts
-	if maxAttempts <= 0 {
-		maxAttempts = 10000
-	}
-	for i := 0; i < maxAttempts; i++ {
+	for i := 0; i < 10000; i++ {
 		expr := a.Impl.Generate(r)
 		if !a.Impl.Validate(expr) {
 			continue

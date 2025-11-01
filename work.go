@@ -19,10 +19,7 @@ const (
 
 // Options control generation ranges, difficulty and presentation preferences
 type Options struct {
-	Difficulty  int  `json:"difficulty"` // 1-easy, 2-medium, 3-hard
-	NiceAnswers bool `json:"nice_answers"`
-	Use2D       bool `json:"use_2d"`
-	MaxAttempts int  `json:"max_attempts"`
+	Difficulty int `json:"difficulty"` // 1-easy, 2-medium, 3-hard
 }
 
 // WorkItem selects a generator by key and specifies repetitions and per-item options

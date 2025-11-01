@@ -18,8 +18,7 @@ type ExpressionGenerator[T any] interface {
 // GenerateValidExpression[T] main method for generating expressions based on `seed`
 func GenerateValidExpression[T any](gen ExpressionGenerator[T], seed string) Expression[T] {
 	r := NewRand(seed)
-	const maxAttempts = 10000
-	for i := 0; i < maxAttempts; i++ {
+	for i := 0; i < 10000; i++ {
 		expr := gen.Generate(r)
 		if !gen.Validate(expr) {
 			continue
