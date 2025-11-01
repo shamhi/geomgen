@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/shamhi/geomgen"
+	"github.com/shamhi/geomgen/v2"
 )
 
 // toMarkdown builds a Markdown document preserving TeX math

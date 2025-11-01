@@ -4,12 +4,12 @@ import (
 	"math/rand"
 	"sort"
 
-	"github.com/shamhi/geomgen/categories/coordinates"
-	"github.com/shamhi/geomgen/categories/lines"
-	"github.com/shamhi/geomgen/categories/planes"
-	"github.com/shamhi/geomgen/categories/points"
-	"github.com/shamhi/geomgen/categories/triangles"
-	"github.com/shamhi/geomgen/categories/vectors"
+	"github.com/shamhi/geomgen/v2/categories/coordinates"
+	"github.com/shamhi/geomgen/v2/categories/lines"
+	"github.com/shamhi/geomgen/v2/categories/planes"
+	"github.com/shamhi/geomgen/v2/categories/points"
+	"github.com/shamhi/geomgen/v2/categories/triangles"
+	"github.com/shamhi/geomgen/v2/categories/vectors"
 )
 
 // UnifiedGenerator is a non-generic facade over concrete generators

@@ -6,7 +6,7 @@ import (
 	"math"
 	"math/rand"
 
-	"github.com/shamhi/geomgen/utils"
+	"github.com/shamhi/geomgen/v2/utils"
 )
 
 type PointPlane struct {

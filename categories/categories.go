@@ -1,10 +1,10 @@
 package categories
 
 import (
-	"github.com/shamhi/geomgen/categories/lines"
-	"github.com/shamhi/geomgen/categories/planes"
-	"github.com/shamhi/geomgen/categories/triangles"
-	"github.com/shamhi/geomgen/categories/vectors"
+	"github.com/shamhi/geomgen/v2/categories/lines"
+	"github.com/shamhi/geomgen/v2/categories/planes"
+	"github.com/shamhi/geomgen/v2/categories/triangles"
+	"github.com/shamhi/geomgen/v2/categories/vectors"
 )
 
 type VectorAngleGenerator = vectors.VectorAngleGenerator
